@@ -2,24 +2,40 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
 const CardDeck = () => {
-  const [cards, setCards] = useState(["test", "nice", "more cards"]);
-
-  const shiffleDeck = (deck) => {
-    let newDeck = deck;
+  const shuffleArray = (arr) => {
+    let newArr = arr;
     let picked, temp;
-    for (let i = newDeck.length - 1; i >= 0; i--) {
+    for (let i = newArr.length - 1; i >= 0; i--) {
       picked = Math.floor(Math.random() * i);
-      temp = newDeck[i];
-      newDeck[i] = newDeck[picked];
-      newDeck[picked] = temp;
+      temp = newArr[i];
+      newArr[i] = newArr[picked];
+      newArr[picked] = temp;
     }
-    return newDeck;
+    return newArr;
   };
+  const [cards, setCards] = useState(
+    shuffleArray([
+      "HA",
+      "H1",
+      "H2",
+      "H3",
+      "H4",
+      "H5",
+      "H6",
+      "H7",
+      "H8",
+      "H9",
+      "H10",
+      "HJ",
+      "HQ",
+      "HK",
+    ])
+  );
 
   const handleCardClick = (cardTitle) => {
-    console.log(cardTitle);
-    setCards(() => shiffleDeck(cards));
+    setCards(() => [...shuffleArray(cards)]);
   };
+
   return (
     <div className="card-deck">
       {cards.map((card) => (
