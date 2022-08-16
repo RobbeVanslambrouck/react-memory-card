@@ -1,44 +1,31 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
-const CardDeck = () => {
+const CardDeck = (props) => {
   const shuffleArray = (arr) => {
     let newArr = arr;
-    let picked, temp;
-    for (let i = newArr.length - 1; i >= 0; i--) {
-      picked = Math.floor(Math.random() * i);
-      temp = newArr[i];
-      newArr[i] = newArr[picked];
-      newArr[picked] = temp;
+    let index = arr.length,
+      randIndex,
+      temp;
+    while (index !== 0) {
+      randIndex = Math.floor(Math.random() * index);
+      index--;
+      temp = newArr[index];
+      newArr[index] = newArr[randIndex];
+      newArr[randIndex] = temp;
     }
     return newArr;
   };
-  const [cards, setCards] = useState(
-    shuffleArray([
-      "HA",
-      "H1",
-      "H2",
-      "H3",
-      "H4",
-      "H5",
-      "H6",
-      "H7",
-      "H8",
-      "H9",
-      "H10",
-      "HJ",
-      "HQ",
-      "HK",
-    ])
-  );
+  const [deck, setDeck] = useState(shuffleArray(props.cards || []));
 
   const handleCardClick = (cardTitle) => {
-    setCards(() => [...shuffleArray(cards)]);
+    setDeck(() => [...shuffleArray(deck)]);
+    if (props.onCardClick) props.onCardClick(cardTitle);
   };
 
   return (
     <div className="card-deck">
-      {cards.map((card) => (
+      {deck.map((card) => (
         <Card title={card} onClick={handleCardClick} key={card} />
       ))}
     </div>
