@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CardDeck from "./CardDeck";
+import "../styles/game.css";
 
 const Game = () => {
   const [highscore, setHighscore] = useState(0);
@@ -43,7 +44,6 @@ const Game = () => {
   };
   return (
     <div>
-      <p>Game</p>
       <div className="scoreboard">
         <div className="highscore">
           <p>highscore: </p>

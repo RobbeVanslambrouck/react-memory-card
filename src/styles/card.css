@@ -1,0 +1,12 @@
+.card {
+  width: 6rem;
+  height: 9rem;
+  line-height: 9rem;
+  text-align: center;
+  border: 1px solid black;
+  box-shadow: 0.4rem 0.4rem 0.4rem rgba(0, 0, 0, 0.5);
+}
+
+.card:hover {
+  box-shadow: 0.6rem 0.6rem 0.6rem rgba(0, 0, 0, 0.5);
+}

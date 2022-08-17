@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
+import "../styles/cardDeck.css";
 
 const CardDeck = (props) => {
   const shuffleArray = (arr) => {

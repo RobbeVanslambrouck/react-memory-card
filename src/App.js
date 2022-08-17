@@ -1,11 +1,17 @@
 import Game from "./components/Game";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import "./styles/reset.css";
+import "./styles/app.css";
 
 const App = () => {
   return (
     <div>
-      <header></header>
-      <Game />
-      <footer></footer>
+      <Header />
+      <main>
+        <Game />
+      </main>
+      <Footer />
     </div>
   );
 };
