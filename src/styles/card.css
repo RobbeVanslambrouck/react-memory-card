@@ -1,12 +1,22 @@
+
+
 .card {
-  width: 6rem;
-  height: 9rem;
+
+  --cardWidth: 12rem;
+  --cardheight: 18rem;
+  width: var(--cardWidth);
+  height: var(--cardheight);
   line-height: 9rem;
-  text-align: center;
-  border: 1px solid black;
+  text-align: cente;
   box-shadow: 0.4rem 0.4rem 0.4rem rgba(0, 0, 0, 0.5);
+  border-radius: calc(var(--cardWidth)/12);
+  font-size: 3rem;
+  text-align: center;
+  background-color: rgba(0, 0, 255, 0);
+  background-size: var(--cardWidth) var(--cardheight);
 }
 
 .card:hover {
   box-shadow: 0.6rem 0.6rem 0.6rem rgba(0, 0, 0, 0.5);
+  transform: scale(1.01);
 }

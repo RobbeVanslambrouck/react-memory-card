@@ -17,7 +17,7 @@ const CardDeck = (props) => {
     }
     return newArr;
   };
-  const [deck, setDeck] = useState(shuffleArray(props.cards || []));
+  const [deck, setDeck] = useState(() => [...shuffleArray(props.cards || [])]);
 
   const handleCardClick = (cardTitle) => {
     setDeck(() => [...shuffleArray(deck)]);
@@ -27,7 +27,12 @@ const CardDeck = (props) => {
   return (
     <div className="card-deck">
       {deck.map((card) => (
-        <Card title={card} onClick={handleCardClick} key={card} />
+        <Card
+          title={card}
+          imgPath={card}
+          onClick={handleCardClick}
+          key={card}
+        />
       ))}
     </div>
   );

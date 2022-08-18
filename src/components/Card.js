@@ -8,8 +8,12 @@ const Card = (props) => {
     props.onClick(title);
   };
   return (
-    <div className="card" onClick={handleClick}>
-      <p className="card-title">{title}</p>
+    <div
+      className="card"
+      onClick={handleClick}
+      style={{ backgroundImage: `url(/cards/${props.imgPath})` }}
+    >
+      <p className="card-title"></p>
     </div>
   );
 };

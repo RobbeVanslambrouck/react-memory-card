@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from "react";
 import CardDeck from "./CardDeck";
 import "../styles/game.css";
+import cardsJSON from "../cardNames.json";
+import { shuffle } from "../helper";
+
+const cardsData = cardsJSON[0].contents;
 
 const Game = () => {
   const [highscore, setHighscore] = useState(0);
   const [score, setScore] = useState(0);
   const [clickedCards, setClickedCards] = useState({ count: 0 });
-  const [cards, setCards] = useState([
-    "HA",
-    "H2",
-    "H3",
-    "H4",
-    "H5",
-    "H6",
-    "H7",
-    "H8",
-    "H9",
-    "H10",
-    "HJ",
-    "HQ",
-    "HK",
-  ]);
+
+  const getCardPaths = (amount, cardsData) => {
+    if (amount > cardsData.length) {
+      return cardsData.map((card) => cardsJSON[0].name.slice(2) + card.name);
+    }
+    const cards = shuffle(cardsData).slice(0, amount);
+    return cards.map((card) => cardsJSON[0].name.slice(2) + card.name);
+  };
+  const [cards, setCards] = useState(getCardPaths(5, cardsData));
 
   useEffect(() => {
     if (score > highscore) setHighscore(score);
-  }, [score]);
+  }, [score, highscore]);
 
   const handleCardClick = (title) => {
     if (clickedCards[title]) {
@@ -37,11 +35,12 @@ const Game = () => {
     clickedCards[title] = true;
     setScore(score + 1);
     if (clickedCards.count === cards.length) {
-      console.log("won");
       setClickedCards({ count: 0 });
+      console.log("won");
       return;
     }
   };
+
   return (
     <div>
       <div className="scoreboard">
