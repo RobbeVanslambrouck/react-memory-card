@@ -4,7 +4,11 @@ import "../styles/game.css";
 import cardsJSON from "../cards.json";
 import { shuffle } from "../helper";
 
-const cardsData = cardsJSON[0].contents[0].contents;
+const HANAFUDA_CARDS = 0;
+const ENGLISH_PLAYING_CARDS = 1;
+
+const CURRENT_CARD_DECK = HANAFUDA_CARDS;
+const cardsData = cardsJSON[0].contents[CURRENT_CARD_DECK].contents;
 
 const getCardPaths = (amount, cardsData) => {
   return shuffle(cardsData)
@@ -60,7 +64,7 @@ const Game = () => {
         </div>
       </div>
       <CardDeck
-        dirPath="/cards/playing_cards/"
+        dirPath={`/cards/${cardsJSON[0].contents[CURRENT_CARD_DECK].name}`}
         cards={cards}
         key={cards}
         onCardClick={handleCardClick}

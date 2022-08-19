@@ -8,7 +8,7 @@
   height: var(--cardheight);
   line-height: 9rem;
   text-align: cente;
-  box-shadow: 0.4rem 0.4rem 0.4rem rgba(0, 0, 0, 0.5);
+  /*box-shadow: 0.4rem 0.4rem 0.4rem rgba(0, 0, 0, 0.5);*/
   border-radius: calc(var(--cardWidth)/12);
   font-size: 3rem;
   text-align: center;
@@ -17,6 +17,6 @@
 }
 
 .card:hover {
-  box-shadow: 0.6rem 0.6rem 0.6rem rgba(0, 0, 0, 0.5);
-  transform: scale(1.01);
+  /*box-shadow: 0.6rem 0.6rem 0.6rem rgba(0, 0, 0, 0.5);*/
+  transform: scale(1.02);
 }
