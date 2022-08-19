@@ -1,11 +1,12 @@
 footer {
   min-height: 5rem;
-  line-height: 5rem;
   box-shadow: 3px -3px 10px 3px #ddd;
-  display: flex;
+  display: flex !important;
   column-gap: 0.5rem;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+  font-size: 1.2rem !important;
 }
 
 footer a {
