@@ -1,26 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Card from "./Card";
+import { shuffle } from "../helper";
 import "../styles/cardDeck.css";
 
 const CardDeck = (props) => {
-  const shuffleArray = (arr) => {
-    let newArr = arr;
-    let index = arr.length,
-      randIndex,
-      temp;
-    while (index !== 0) {
-      randIndex = Math.floor(Math.random() * index);
-      index--;
-      temp = newArr[index];
-      newArr[index] = newArr[randIndex];
-      newArr[randIndex] = temp;
-    }
-    return newArr;
-  };
-  const [deck, setDeck] = useState(() => [...shuffleArray(props.cards || [])]);
+  const [deck, setDeck] = useState(() => [...shuffle(props.cards || [])]);
 
   const handleCardClick = (cardTitle) => {
-    setDeck(() => [...shuffleArray(deck)]);
+    setDeck(() => [...shuffle(deck)]);
     if (props.onCardClick) props.onCardClick(cardTitle);
   };
 
@@ -28,8 +15,8 @@ const CardDeck = (props) => {
     <div className="card-deck">
       {deck.map((card) => (
         <Card
-          title={card}
-          imgPath={card}
+          name={card}
+          imgPath={`${props.dirPath}/${card}`}
           onClick={handleCardClick}
           key={card}
         />

@@ -1,4 +1,4 @@
-export const shuffle = (array) => {
+export function shuffle(array) {
   let newArr = array;
   let index = array.length,
     randIndex,
@@ -11,4 +11,4 @@ export const shuffle = (array) => {
     newArr[randIndex] = temp;
   }
   return newArr;
-};
+}

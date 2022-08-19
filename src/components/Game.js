@@ -1,40 +1,46 @@
 import React, { useState, useEffect } from "react";
 import CardDeck from "./CardDeck";
 import "../styles/game.css";
-import cardsJSON from "../cardNames.json";
+import cardsJSON from "../cards.json";
 import { shuffle } from "../helper";
 
-const cardsData = cardsJSON[0].contents;
+const cardsData = cardsJSON[0].contents[0].contents;
+
+const getCardPaths = (amount, cardsData) => {
+  return shuffle(cardsData)
+    .slice(0, amount)
+    .map((card) => card.name);
+};
 
 const Game = () => {
   const [highscore, setHighscore] = useState(0);
   const [score, setScore] = useState(0);
   const [clickedCards, setClickedCards] = useState({ count: 0 });
-
-  const getCardPaths = (amount, cardsData) => {
-    if (amount > cardsData.length) {
-      return cardsData.map((card) => cardsJSON[0].name.slice(2) + card.name);
-    }
-    const cards = shuffle(cardsData).slice(0, amount);
-    return cards.map((card) => cardsJSON[0].name.slice(2) + card.name);
-  };
-  const [cards, setCards] = useState(getCardPaths(5, cardsData));
+  const [numOfCards, setNumOfCards] = useState(3);
+  const [cards, setCards] = useState(() => getCardPaths(numOfCards, cardsData));
 
   useEffect(() => {
     if (score > highscore) setHighscore(score);
   }, [score, highscore]);
+
+  useEffect(() => {
+    setCards(() => [...getCardPaths(numOfCards, cardsData)]);
+  }, [numOfCards]);
 
   const handleCardClick = (title) => {
     if (clickedCards[title]) {
       console.log("game over");
       setClickedCards({ count: 0 });
       setScore(0);
+      setNumOfCards(3);
       return;
     }
     clickedCards.count += 1;
     clickedCards[title] = true;
-    setScore(score + 1);
+    setScore((prevScore) => prevScore + 1);
     if (clickedCards.count === cards.length) {
+      setScore((prevScore) => prevScore + numOfCards);
+      setNumOfCards((prev) => prev + 1);
       setClickedCards({ count: 0 });
       console.log("won");
       return;
@@ -53,7 +59,12 @@ const Game = () => {
           <p>{score}</p>
         </div>
       </div>
-      <CardDeck cards={cards} onCardClick={handleCardClick} />
+      <CardDeck
+        dirPath="/cards/playing_cards/"
+        cards={cards}
+        key={cards}
+        onCardClick={handleCardClick}
+      />
     </div>
   );
 };
