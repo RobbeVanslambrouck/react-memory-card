@@ -16,7 +16,7 @@ const CardDeck = (props) => {
       {deck.map((card) => (
         <Card
           name={card}
-          imgPath={`${props.dirPath}/${card}`}
+          imgPath={`${process.env.PUBLIC_URL}${props.dirPath}/${card}`}
           onClick={handleCardClick}
           key={card}
         />
